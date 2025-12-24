@@ -2,7 +2,7 @@
  * أداة عرض فيديوهات يوتيوب - الإصدار الخارجي
  * يتم استضافة هذا الملف على GitHub
  * 
- *使用方法: أضف الكود التالي في بلوجر:
+ * طريقة الاستخدام: أضف الكود التالي في بلوجر:
  * <div id="youtube-widget-container" data-channel-id="معرف_القناة"></div>
  * <script src="رابط_الملف_من_GitHub"></script>
  */
@@ -26,42 +26,17 @@
     };
 
     // ==== أنماط CSS المضمنة ====
-    const getStyles = () => `
+    function getStyles() {
+        return `
         <style>
             /* -------------------------------------- */
             /* التنسيقات العامة */
             /* -------------------------------------- */
-            :root {
-                --linkC: #3b82f6;
-                --contentB: #ffffff;
-                --contentBa: #f8fafc;
-                --contentL: #e2e8f0;
-                --notifB: #f1f5f9;
-                --notifC: #64748b;
-                --headerC: #1e293b;
-                --bodyC: #334155;
-                --bodyB: #ffffff;
-                --iconC: #64748b;
-                --greetR: 6px;
-                --thumbEr: 4px;
-                --linkR: 6px;
-                --bs-1: 0 3px 9px -2px rgba(0,0,0,.1);
-                --trans-3: 0.3s;
-                --trans-1: 0.1s;
-                --resetC: #ef4444;
-                --successC: #10b981;
-                --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.1);
-                --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1);
-                --card-dark-overlay: rgba(0, 0, 0, 0.3);
-                --white: #ffffff;
-            }
-
-            /* ===== الإطار الرئيسي ===== */
             .yt-widget-container {
                 position: relative;
                 padding: 15px;
                 border-radius: 8px;
-                background: var(--contentB);
+                background: #ffffff;
                 margin-top: 20px;
                 box-shadow: 0 4px 12px rgba(0,0,0,0.1);
                 font-family: inherit;
@@ -88,7 +63,7 @@
             .yt-widget {
                 max-width: 100%;
                 font-family: inherit, sans-serif;
-                color: var(--bodyC);
+                color: #334155;
                 background: transparent;
                 padding: 0;
             }
@@ -99,7 +74,7 @@
                 font-weight: bold;
                 margin: 0 0 15px 0;
                 padding: 0;
-                color: var(--headerC);
+                color: #1e293b;
                 text-align: center;
             }
 
@@ -114,7 +89,7 @@
                 align-items: center;
                 background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
                 font-size: 11px;
-                border-radius: var(--greetR);
+                border-radius: 6px;
                 margin: 20px 0;
             }
 
@@ -124,8 +99,8 @@
             }
 
             .yt-spinner {
-                border: 3px solid var(--contentL);
-                border-top: 3px solid var(--linkC);
+                border: 3px solid #e2e8f0;
+                border-top: 3px solid #3b82f6;
                 border-radius: 50%;
                 width: 40px;
                 height: 40px;
@@ -141,16 +116,16 @@
             /* ===== أزرار التخطيط المصغرة ===== */
             .yt-layout-selector {
                 display: flex;
-                gap: 4px: 20px;
-                margin-bottom;
+                gap: 4px;
+                margin-bottom: 20px;
                 justify-content: center;
                 flex-wrap: wrap;
             }
 
             .yt-layout-btn {
-                background: var(--contentL);
+                background: #e2e8f0;
                 border: none;
-                color: var(--bodyC);
+                color: #334155;
                 padding: 6px 12px;
                 border-radius: 4px;
                 cursor: pointer;
@@ -161,20 +136,20 @@
                 font-size: 9px;
                 font-weight: 500;
                 white-space: nowrap;
-                box-shadow: var(--shadow-light);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             }
 
             .yt-layout-btn:hover {
-                background: var(--linkC);
-                color: var(--white);
+                background: #3b82f6;
+                color: #ffffff;
                 transform: translateY(-1px);
-                box-shadow: var(--shadow-medium);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
 
             .yt-layout-btn.active {
-                background: var(--linkC);
-                color: var(--white);
-                box-shadow: var(--shadow-medium);
+                background: #3b82f6;
+                color: #ffffff;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
 
             .yt-layout-btn svg {
@@ -221,14 +196,14 @@
                 width: 100px;
                 height: 100px;
                 flex-shrink: 0;
-                border-radius: var(--greetR);
+                border-radius: 6px;
             }
 
             .yt-videos-grid-container.layout-list .yt-video-info {
                 padding: 8px 12px;
                 flex-grow: 1;
-                border: 1px solid var(--contentL);
-                border-radius: var(--greetR);
+                border: 1px solid #e2e8f0;
+                border-radius: 6px;
                 margin-right: 10px;
             }
 
@@ -251,7 +226,7 @@
                 border-radius: 0;
                 overflow: visible;
                 box-shadow: none;
-                transition: all var(--trans-3) ease;
+                transition: all 0.3s ease;
                 cursor: pointer;
                 display: flex;
                 flex-direction: column;
@@ -275,7 +250,7 @@
                 overflow: hidden;
                 flex-shrink: 0;
                 border-radius: 0;
-                box-shadow: var(--shadow-light);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
                 margin-bottom: 10px;
             }
 
@@ -288,10 +263,10 @@
                 bottom: 0;
                 background: linear-gradient(
                     to bottom,
-                    var(--card-dark-overlay) 0%,
+                    rgba(0, 0, 0, 0.3) 0%,
                     transparent 20%,
                     transparent 80%,
-                    var(--card-dark-overlay) 100%
+                    rgba(0, 0, 0, 0.3) 100%
                 );
                 z-index: 1;
                 pointer-events: none;
@@ -303,7 +278,7 @@
                 position: absolute;
                 top: 8px;
                 right: 8px;
-                background: var(--linkC);
+                background: #3b82f6;
                 color: white;
                 font-size: 10px;
                 font-weight: bold;
@@ -323,7 +298,7 @@
                 position: absolute;
                 top: 8px;
                 right: 8px;
-                background: var(--linkC);
+                background: #3b82f6;
                 color: white;
                 font-size: 7px;
                 font-weight: bold;
@@ -340,7 +315,7 @@
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
-                transition: transform var(--trans-3) ease;
+                transition: transform 0.3s ease;
                 border-radius: 0;
             }
 
@@ -372,8 +347,8 @@
             .yt-play-icon svg {
                 width: 30px;
                 height: 30px;
-                fill: var(--linkC);
-                stroke: var(--linkC);
+                fill: #3b82f6;
+                stroke: #3b82f6;
                 stroke-width: 1.5;
                 transition: all 0.3s ease;
                 filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
@@ -391,20 +366,20 @@
                 flex-direction: column;
                 flex-grow: 1;
                 justify-content: space-between;
-                background: var(--contentB);
-                border: 1px solid var(--contentL);
-                border-radius: var(--greetR);
-                box-shadow: var(--shadow-light);
-                transition: all var(--trans-1) ease;
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-radius: 6px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                transition: all 0.1s ease;
             }
 
             .yt-video-card:hover .yt-video-info {
-                border-color: var(--linkC);
+                border-color: #3b82f6;
                 box-shadow: 0 4px 12px rgba(14, 165, 164, 0.15);
             }
 
             .yt-video-title {
-                color: var(--headerC);
+                color: #1e293b;
                 margin: 0;
                 font-size: 9px;
                 line-height: 1.4;
@@ -421,7 +396,7 @@
             .yt-video-date {
                 margin-top: 7px;
                 font-size: 8px;
-                color: var(--bodyC);
+                color: #334155;
                 opacity: 0.7;
                 display: flex;
                 align-items: center;
@@ -441,7 +416,7 @@
                 gap: 10px;
                 margin-top: 25px;
                 padding-top: 20px;
-                border-top: 1px solid var(--contentL);
+                border-top: 1px solid #e2e8f0;
                 justify-content: center;
                 flex-wrap: nowrap;
                 overflow-x: auto;
@@ -453,10 +428,10 @@
                 align-items: center;
                 justify-content: center;
                 padding: 8px 16px;
-                color: var(--white);
+                color: #ffffff;
                 font-size: 11px;
                 border-radius: 4px;
-                transition: all var(--trans-3) ease;
+                transition: all 0.3s ease;
                 text-decoration: none !important;
                 cursor: pointer;
                 flex-shrink: 0;
@@ -464,7 +439,7 @@
                 font-weight: 500;
                 border: none;
                 white-space: nowrap;
-                box-shadow: var(--shadow-light);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             }
 
             .yt-button svg {
@@ -475,28 +450,28 @@
             }
 
             .yt-button-primary {
-                background: var(--linkC);
+                background: #3b82f6;
                 color: #ffffff;
                 border-radius: 4px;
                 border: none;
-                box-shadow: var(--shadow-light);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             }
 
             .yt-button-primary:hover {
                 background: #2563eb;
                 transform: translateY(-1px);
-                box-shadow: var(--shadow-medium);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
 
             #reset-btn {
-                background: var(--contentL);
-                color: var(--bodyC);
+                background: #e2e8f0;
+                color: #334155;
                 border-radius: 4px;
             }
 
             #reset-btn:hover {
                 background: #d1d5db;
-                color: var(--resetC);
+                color: #ef4444;
             }
 
             #reset-btn.visible,
@@ -541,7 +516,7 @@
                 right: 15px;
                 width: 40px;
                 height: 40px;
-                background: var(--contentL);
+                background: #e2e8f0;
                 border: none;
                 border-radius: 4px;
                 cursor: pointer;
@@ -560,11 +535,11 @@
             .yt-modal-close svg {
                 width: 20px;
                 height: 20px;
-                stroke: var(--bodyC);
+                stroke: #334155;
             }
 
             .yt-modal-close:hover svg {
-                stroke: var(--white);
+                stroke: #ffffff;
             }
 
             .yt-modal-player-container {
@@ -591,11 +566,11 @@
                 width: 300px;
                 height: 169px;
                 z-index: 9998;
-                background-color: var(--linkC);
+                background-color: #3b82f6;
                 box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
                 border-radius: 4px;
                 overflow: hidden;
-                border: 1px solid var(--contentL);
+                border: 1px solid #e2e8f0;
             }
 
             #yt-mini-player.active {
@@ -616,13 +591,13 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                background: var(--contentL);
+                background: #e2e8f0;
                 padding: 0 8px;
                 z-index: 10000;
             }
 
             #yt-mini-drag-handle {
-                color: var(--bodyC);
+                color: #334155;
                 cursor: move;
                 font-size: 11px;
                 opacity: 0.9;
@@ -635,7 +610,7 @@
             #yt-mini-drag-handle svg {
                 width: 14px;
                 height: 14px;
-                stroke: var(--bodyC);
+                stroke: #334155;
             }
 
             .mini-controls-group {
@@ -646,9 +621,9 @@
 
             .mini-size-btn,
             #yt-mini-close-btn {
-                background: var(--contentB);
-                color: var(--bodyC);
-                border: 1px solid var(--contentL);
+                background: #ffffff;
+                color: #334155;
+                border: 1px solid #e2e8f0;
                 border-radius: 4px;
                 padding: 2px 6px;
                 cursor: pointer;
@@ -660,13 +635,13 @@
             }
 
             .mini-size-btn:hover {
-                background: var(--linkC);
-                color: var(--white);
+                background: #3b82f6;
+                color: #ffffff;
             }
 
             #yt-mini-close-btn:hover {
-                background: var(--resetC);
-                color: var(--white);
+                background: #ef4444;
+                color: #ffffff;
             }
 
             .mini-size-btn svg,
@@ -763,59 +738,59 @@
                 align-self: stretch;
             }
         </style>
-    `;
+        `;
+    }
 
     // ==== قالب HTML للأداة ====
-    const getWidgetHTML = () => `
-        <div class="yt-widget-container">
-            <div class="yt-widget">
-                <p class="yt-widget-title">أحدث الفيديوهات</p>
+    function getWidgetHTML() {
+        return `
+        <div class="yt-widget">
+            <p class="yt-widget-title">أحدث الفيديوهات</p>
 
-                <!-- أزرار التخطيط -->
-                <div class="yt-layout-selector" id="yt-layout-selector">
-                    <button class="yt-layout-btn active" data-layout="default" title="تخطيط ثلاث أعمدة">
-                        <svg class='line' viewbox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'>
-                            <path d='M5 10H7C9 10 10 9 10 7V5C10 3 9 2 7 2H5C3 2 2 3 2 5V7C2 9 3 10 5 10Z' stroke-miterlimit='10'></path>
-                            <path d='M17 10H19C21 10 22 9 22 7V5C22 3 21 2 19 2H17C15 2 14 3 14 5V7C14 9 15 10 17 10Z' stroke-miterlimit='10'></path>
-                            <path d='M17 22H19C21 22 22 21 22 19V17C22 15 21 14 19 14H17C15 14 14 15 14 17V19C14 21 15 22 17 22Z' stroke-miterlimit='10'></path>
-                            <path d='M5 22H7C9 22 10 21 10 19V17C10 15 9 14 7 14H5C3 14 2 15 2 17V19C2 21 3 22 5 22Z' stroke-miterlimit='10'></path>
-                        </svg>
-                        3 أعمدة
-                    </button>
-                    <button class="yt-layout-btn" data-layout="layout-two-cols" title="تخطيط عمودين">
-                        <svg class='line' viewbox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'>
-                            <path d='M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z'></path>
-                            <path d='M12 2V22'></path>
-                        </svg>
-                        عمودين
-                    </button>
-                    <button class="yt-layout-btn" data-layout="layout-list" title="قائمة مصغرة">
-                        <svg class='line' viewbox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'>
-                            <path d='M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z'></path>
-                            <path d='M9 2V22'></path>
-                        </svg>
-                        مصغر
-                    </button>
-                </div>
+            <!-- أزرار التخطيط -->
+            <div class="yt-layout-selector" id="yt-layout-selector">
+                <button class="yt-layout-btn active" data-layout="default" title="تخطيط ثلاث أعمدة">
+                    <svg class='line' viewbox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'>
+                        <path d='M5 10H7C9 10 10 9 10 7V5C10 3 9 2 7 2H5C3 2 2 3 2 5V7C2 9 3 10 5 10Z' stroke-miterlimit='10'></path>
+                        <path d='M17 10H19C21 10 22 9 22 7V5C22 3 21 2 19 2H17C15 2 14 3 14 5V7C14 9 15 10 17 10Z' stroke-miterlimit='10'></path>
+                        <path d='M17 22H19C21 22 22 21 22 19V17C22 15 21 14 19 14H17C15 14 14 15 14 17V19C14 21 15 22 17 22Z' stroke-miterlimit='10'></path>
+                        <path d='M5 22H7C9 22 10 21 10 19V17C10 15 9 14 7 14H5C3 14 2 15 2 17V19C2 21 3 22 5 22Z' stroke-miterlimit='10'></path>
+                    </svg>
+                    3 أعمدة
+                </button>
+                <button class="yt-layout-btn" data-layout="layout-two-cols" title="تخطيط عمودين">
+                    <svg class='line' viewbox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'>
+                        <path d='M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z'></path>
+                        <path d='M12 2V22'></path>
+                    </svg>
+                    عمودين
+                </button>
+                <button class="yt-layout-btn" data-layout="layout-list" title="قائمة مصغرة">
+                    <svg class='line' viewbox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'>
+                        <path d='M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z'></path>
+                        <path d='M9 2V22'></path>
+                    </svg>
+                    مصغر
+                </button>
+            </div>
 
-                <!-- حاوية الفيديوهات -->
-                <div id="youtube-content" class="yt-videos-grid-container"></div>
+            <!-- حاوية الفيديوهات -->
+            <div id="youtube-content" class="yt-videos-grid-container"></div>
 
-                <!-- أزرار التحكم -->
-                <div class="yt-actions-bar">
-                    <button id="reset-btn" class="yt-button" style="display: none;">
-                        <svg class='line' viewbox='0 0 24 24'><path d='M22 12C22 17.52 17.52 22 12 22C6.48 22 3.11 16.44 3.11 16.44M3.11 16.44H7.63M3.11 16.44V21.44M2 12C2 6.48 6.44 2 12 2C18.67 2 22 7.56 22 7.56M22 7.56V2.56M22 7.56H17.56'></path></svg>
-                        إعادة تعيين
-                    </button>
-                    <a id="watch-more-btn" href="#" target="_blank" class="yt-button yt-button-primary">
-                        <svg class='line' viewbox='0 0 24 24'><path d='M18.0699 14.4299L11.9999 20.4999L5.92993 14.4299' stroke-miterlimit='10'></path><path d='M12 3.5V20.33' stroke-miterlimit='10'></path></svg>
-                        مشاهدة المزيد
-                    </a>
-                    <a id="view-channel-btn" href="#" target="_blank" class="yt-button yt-button-primary">
-                        <svg class='line' viewbox='0 0 24 24'><path d='M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12' stroke-miterlimit='10'></path><path d='M13 11L21.2 2.80005'></path><path d='M21.9999 6.83V2H17.1699'></path></svg>
-                        زيارة القناة
-                    </a>
-                </div>
+            <!-- أزرار التحكم -->
+            <div class="yt-actions-bar">
+                <button id="reset-btn" class="yt-button" style="display: none;">
+                    <svg class='line' viewbox='0 0 24 24'><path d='M22 12C22 17.52 17.52 22 12 22C6.48 22 3.11 16.44 3.11 16.44M3.11 16.44H7.63M3.11 16.44V21.44M2 12C2 6.48 6.44 2 12 2C18.67 2 22 7.56 22 7.56M22 7.56V2.56M22 7.56H17.56'></path></svg>
+                    إعادة تعيين
+                </button>
+                <a id="watch-more-btn" href="#" target="_blank" class="yt-button yt-button-primary">
+                    <svg class='line' viewbox='0 0 24 24'><path d='M18.0699 14.4299L11.9999 20.4999L5.92993 14.4299' stroke-miterlimit='10'></path><path d='M12 3.5V20.33' stroke-miterlimit='10'></path></svg>
+                    مشاهدة المزيد
+                </a>
+                <a id="view-channel-btn" href="#" target="_blank" class="yt-button yt-button-primary">
+                    <svg class='line' viewbox='0 0 24 24'><path d='M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12' stroke-miterlimit='10'></path><path d='M13 11L21.2 2.80005'></path><path d='M21.9999 6.83V2H17.1699'></path></svg>
+                    زيارة القناة
+                </a>
             </div>
         </div>
 
@@ -854,7 +829,8 @@
             </div>
             <div id="yt-mini-player-iframe-container"></div>
         </div>
-    `;
+        `;
+    }
 
     // ==== دوال مساعدة ====
     function timeAgo(dateString) {
@@ -874,7 +850,7 @@
         for (const interval of intervals) {
             const count = Math.floor(seconds / interval.seconds);
             if (count >= 1) {
-                return `قبل ${count} ${interval.label}${count > 1 && !['ساعة', 'دقيقة'].includes(interval.label) ? 'ات' : ''}`;
+                return 'قبل ' + count + ' ' + interval.label + (count > 1 && !['ساعة', 'دقيقة'].includes(interval.label) ? 'ات' : '');
             }
         }
         return 'الآن';
@@ -893,19 +869,20 @@
         try {
             const cached = localStorage.getItem('yt-widget-cache');
             if (!cached) return null;
-            const { data, timestamp } = JSON.parse(cached);
-            if (Date.now() - timestamp > DEFAULT_CONFIG.CACHE_DURATION) {
+            const parsed = JSON.parse(cached);
+            if (Date.now() - parsed.timestamp > DEFAULT_CONFIG.CACHE_DURATION) {
                 localStorage.removeItem('yt-widget-cache');
                 return null;
             }
-            return data;
+            return parsed.data;
         } catch (e) { return null; }
     }
 
     function setCache(data) {
         try {
             localStorage.setItem('yt-widget-cache', JSON.stringify({
-                data, timestamp: Date.now()
+                data: data,
+                timestamp: Date.now()
             }));
         } catch (e) {}
     }
@@ -914,7 +891,7 @@
     class YouTubeWidget {
         constructor(containerId, config = {}) {
             this.containerId = containerId;
-            this.config = { ...DEFAULT_CONFIG, ...config };
+            this.config = Object.assign({}, DEFAULT_CONFIG, config);
             this.allFetchedVideos = [];
             this.currentlyDisplayedCount = 0;
             this.cache = null;
@@ -926,8 +903,8 @@
             this.initialLeft = 0;
             this.initialBottom = 0;
 
-            this.CHANNEL_URL = `https://www.youtube.com/channel/${this.config.CHANNEL_ID}`;
-            this.RSS_URL = `https://www.youtube.com/feeds/videos.xml?channel_id=${this.config.CHANNEL_ID}`;
+            this.CHANNEL_URL = 'https://www.youtube.com/channel/' + this.config.CHANNEL_ID;
+            this.RSS_URL = 'https://www.youtube.com/feeds/videos.xml?channel_id=' + this.config.CHANNEL_ID;
 
             this.init();
         }
@@ -935,7 +912,7 @@
         init() {
             const container = document.getElementById(this.containerId);
             if (!container) {
-                console.error(`لم يتم العثور على الحاوية: ${this.containerId}`);
+                console.error('لم يتم العثور على الحاوية: ' + this.containerId);
                 return;
             }
 
@@ -954,12 +931,13 @@
                 watchMore: container.querySelector('#watch-more-btn'),
                 viewChannel: container.querySelector('#view-channel-btn'),
                 resetBtn: container.querySelector('#reset-btn'),
-                layoutBtns: container.querySelectorAll('.yt-layout-btn'),
                 zoomOut: container.querySelector('#yt-mini-zoom-out'),
                 zoomIn: container.querySelector('#yt-mini-zoom-in'),
                 miniClose: container.querySelector('#yt-mini-close-btn'),
                 layoutSelector: container.querySelector('#yt-layout-selector')
             };
+
+            this.elements.layoutBtns = container.querySelectorAll('.yt-layout-btn');
 
             // تهيئة رابط القناة
             this.elements.viewChannel.href = this.CHANNEL_URL;
@@ -972,73 +950,96 @@
         }
 
         bindEvents() {
+            const self = this;
+
             // أزرار التخطيط
-            this.elements.layoutSelector.addEventListener('click', (e) => {
+            this.elements.layoutSelector.addEventListener('click', function(e) {
                 const btn = e.target.closest('.yt-layout-btn');
                 if (!btn) return;
 
-                this.elements.layoutBtns.forEach(b => b.classList.remove('active'));
+                self.elements.layoutBtns.forEach(function(b) {
+                    b.classList.remove('active');
+                });
                 btn.classList.add('active');
 
                 const layout = btn.getAttribute('data-layout');
-                this.elements.content.classList.remove('layout-list', 'layout-two-cols');
+                self.elements.content.classList.remove('layout-list', 'layout-two-cols');
                 if (layout !== 'default') {
-                    this.elements.content.classList.add(layout);
+                    self.elements.content.classList.add(layout);
                 }
             });
 
             // أزرار التحكم
-            this.elements.watchMore.addEventListener('click', (e) => {
+            this.elements.watchMore.addEventListener('click', function(e) {
                 e.preventDefault();
-                this.addMoreVideos();
+                self.addMoreVideos();
             });
 
-            this.elements.resetBtn.addEventListener('click', (e) => {
+            this.elements.resetBtn.addEventListener('click', function(e) {
                 e.preventDefault();
-                this.resetVideos();
+                self.resetVideos();
             });
 
-            this.elements.closeBtn.addEventListener('click', () => this.minimizePlayer());
-            this.elements.miniClose.addEventListener('click', () => this.stopMini());
+            this.elements.closeBtn.addEventListener('click', function() {
+                self.minimizePlayer();
+            });
+
+            this.elements.miniClose.addEventListener('click', function() {
+                self.stopMini();
+            });
 
             // إغلاق النافذة بالنقر خارجها
-            this.elements.modal.addEventListener('click', (e) => {
-                if (e.target === this.elements.modal) this.minimizePlayer();
+            this.elements.modal.addEventListener('click', function(e) {
+                if (e.target === self.elements.modal) {
+                    self.minimizePlayer();
+                }
             });
 
             // مفتاح ESC
-            document.addEventListener('keydown', (e) => {
+            document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
-                    if (this.elements.miniPlayer.classList.contains('active')) {
-                        this.stopMini();
-                    } else if (this.elements.modal.style.display === 'block') {
-                        this.minimizePlayer();
+                    if (self.elements.miniPlayer.classList.contains('active')) {
+                        self.stopMini();
+                    } else if (self.elements.modal.style.display === 'block') {
+                        self.minimizePlayer();
                     }
                 }
             });
 
             // التحكم بالحجم
-            this.elements.zoomOut.onclick = () => {
-                this.elements.miniPlayer.classList.add('small-size');
-                this.elements.zoomOut.style.display = 'none';
-                this.elements.zoomIn.style.display = 'block';
+            this.elements.zoomOut.onclick = function() {
+                self.elements.miniPlayer.classList.add('small-size');
+                self.elements.zoomOut.style.display = 'none';
+                self.elements.zoomIn.style.display = 'block';
             };
 
-            this.elements.zoomIn.onclick = () => {
-                this.elements.miniPlayer.classList.remove('small-size');
-                this.elements.zoomIn.style.display = 'none';
-                this.elements.zoomOut.style.display = 'block';
+            this.elements.zoomIn.onclick = function() {
+                self.elements.miniPlayer.classList.remove('small-size');
+                self.elements.zoomIn.style.display = 'none';
+                self.elements.zoomOut.style.display = 'block';
             };
 
             this.elements.zoomIn.style.display = 'none';
 
             // ربط أحداث السحب
-            this.elements.dragHandle.addEventListener('mousedown', (e) => this.dragStart(e));
-            this.elements.dragHandle.addEventListener('touchstart', (e) => this.dragStart(e));
-            document.addEventListener('mouseup', () => this.dragEnd());
-            document.addEventListener('touchend', () => this.dragEnd());
-            document.addEventListener('mousemove', (e) => this.drag(e));
-            document.addEventListener('touchmove', (e) => this.drag(e));
+            this.elements.dragHandle.addEventListener('mousedown', function(e) {
+                self.dragStart(e);
+            });
+            this.elements.dragHandle.addEventListener('touchstart', function(e) {
+                self.dragStart(e);
+            });
+            document.addEventListener('mouseup', function() {
+                self.dragEnd();
+            });
+            document.addEventListener('touchend', function() {
+                self.dragEnd();
+            });
+            document.addEventListener('mousemove', function(e) {
+                self.drag(e);
+            });
+            document.addEventListener('touchmove', function(e) {
+                self.drag(e);
+            });
         }
 
         dragStart(e) {
@@ -1084,53 +1085,40 @@
             newLeft = Math.max(0, Math.min(newLeft, winW - playerW));
             newBottom = Math.max(0, Math.min(newBottom, winH - playerH));
 
-            this.elements.miniPlayer.style.left = `${newLeft}px`;
-            this.elements.miniPlayer.style.bottom = `${newBottom}px`;
+            this.elements.miniPlayer.style.left = newLeft + 'px';
+            this.elements.miniPlayer.style.bottom = newBottom + 'px';
         }
 
         // ==== إدارة الواجهة ====
         showLoading() {
-            this.elements.content.innerHTML = `
-                <div class="yt-state-message">
-                    <div class="yt-spinner"></div>
-                    <p>جاري تحميل أحدث الفيديوهات...</p>
-                </div>
-            `;
+            this.elements.content.innerHTML = '<div class="yt-state-message"><div class="yt-spinner"></div><p>جاري تحميل أحدث الفيديوهات...</p></div>';
         }
 
-        showError(message, showRetry = true) {
-            this.elements.content.innerHTML = `
-                <div class="yt-state-message error">
-                    <svg style="width: 48px; height: 48px; color: #ef4444; margin-bottom: 15px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="15" y1="9" x2="9" y2="15"></line>
-                        <line x1="9" y1="9" x2="15" y2="15"></line>
-                    </svg>
-                    <p style="margin-bottom: 15px; font-weight: 600;">${message}</p>
-                    ${showRetry ? `
-                        <button onclick="location.reload()" class="yt-button yt-button-primary">
-                            إعادة المحاولة
-                        </button>
-                    ` : ''}
-                </div>
-            `;
+        showError(message, showRetry) {
+            var retryBtn = showRetry ? '<button onclick="location.reload()" class="yt-button yt-button-primary">إعادة المحاولة</button>' : '';
+            this.elements.content.innerHTML = '<div class="yt-state-message error"><p>' + message + '</p>' + retryBtn + '</div>';
         }
 
         // ==== تحميل الفيديوهات ====
-        async fetchWithRetry(url, retries = 3) {
-            for (let i = 0; i < retries; i++) {
+        async fetchWithRetry(url, retries) {
+            retries = retries || 3;
+            for (var i = 0; i < retries; i++) {
                 try {
-                    const response = await fetch(url);
-                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    var response = await fetch(url);
+                    if (!response.ok) throw new Error('HTTP ' + response.status);
                     return await response.json();
                 } catch (error) {
                     if (i === retries - 1) throw error;
-                    await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)));
+                    await new Promise(function(resolve) {
+                        setTimeout(resolve, 1000 * (i + 1));
+                    });
                 }
             }
         }
 
-        async loadVideos(forceRefresh = false) {
+        async loadVideos(forceRefresh) {
+            forceRefresh = forceRefresh || false;
+
             if (this.isLoading) return;
 
             // فحص التخزين المؤقت
@@ -1149,39 +1137,37 @@
             this.showLoading();
 
             try {
-                const proxyUrl = this.config.CORS_PROXY + encodeURIComponent(this.RSS_URL);
-                const data = await this.fetchWithRetry(proxyUrl);
+                var proxyUrl = this.config.CORS_PROXY + encodeURIComponent(this.RSS_URL);
+                var data = await this.fetchWithRetry(proxyUrl);
 
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(data.contents, 'text/xml');
+                var parser = new DOMParser();
+                var xmlDoc = parser.parseFromString(data.contents, 'text/xml');
 
                 if (xmlDoc.getElementsByTagName('parsererror').length > 0) {
                     throw new Error('خطأ في تحليل البيانات');
                 }
 
-                const entries = xmlDoc.getElementsByTagName('entry');
+                var entries = xmlDoc.getElementsByTagName('entry');
                 this.allFetchedVideos = [];
 
-                for (let i = 0; i < Math.min(entries.length, this.config.MAX_FETCH_COUNT); i++) {
-                    const entry = entries[i];
-                    const title = entry.getElementsByTagName('title')[0]?.textContent?.trim() || 'بدون عنوان';
-                    const link = entry.getElementsByTagName('link')[0]?.getAttribute('href') || '';
-                    const published = entry.getElementsByTagName('published')[0]?.textContent || '';
-                    const videoId = getVideoId(link);
+                for (var i = 0; i < Math.min(entries.length, this.config.MAX_FETCH_COUNT); i++) {
+                    var entry = entries[i];
+                    var title = entry.getElementsByTagName('title')[0] ? entry.getElementsByTagName('title')[0].textContent.trim() : 'بدون عنوان';
+                    var link = entry.getElementsByTagName('link')[0] ? entry.getElementsByTagName('link')[0].getAttribute('href') : '';
+                    var published = entry.getElementsByTagName('published')[0] ? entry.getElementsByTagName('published')[0].textContent : '';
+                    var videoId = getVideoId(link);
 
                     if (videoId) {
-                        const isShort = isShorts(link);
-                        const thumbnail = isShort
-                            ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
-                            : `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+                        var isShort = isShorts(link);
+                        var thumbnail = isShort ? 'https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg' : 'https://img.youtube.com/vi/' + videoId + '/mqdefault.jpg';
 
                         this.allFetchedVideos.push({
-                            title,
-                            videoId,
-                            link,
-                            published,
-                            thumbnail,
-                            isShort,
+                            title: title,
+                            videoId: videoId,
+                            link: link,
+                            published: published,
+                            thumbnail: thumbnail,
+                            isShort: isShort,
                             type: isShort ? 'shorts' : 'video'
                         });
                     }
@@ -1214,132 +1200,137 @@
         }
 
         showVideos(videos) {
+            var self = this;
+
             if (videos.length === 0) {
                 this.showError('لم يتم العثور على فيديوهات لعرضها.');
                 return;
             }
 
-            let html = '<div class="yt-videos-grid">';
-            videos.forEach((video) => {
-                const shortClass = video.isShort ? ' is-short' : '';
-                const shortsBadge = video.isShort ? '<div class="yt-shorts-badge">SHORTS</div>' : '';
+            var html = '<div class="yt-videos-grid">';
+            videos.forEach(function(video) {
+                var shortClass = video.isShort ? ' is-short' : '';
+                var shortsBadge = video.isShort ? '<div class="yt-shorts-badge">SHORTS</div>' : '';
 
-                html += `
-                    <div class="yt-video-card${shortClass}" data-video-id="${video.videoId}" data-link="${video.link}" data-video-type="${video.type}">
-                        <div class="yt-thumbnail-wrapper">
-                            <img src="${video.thumbnail}" alt="${video.title}" loading="lazy">
-                            ${shortsBadge}
-                            <div class="yt-play-icon">
-                                <svg class='line' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M4 11.9999V8.43989C4 4.01989 7.13 2.2099 10.96 4.4199L14.05 6.1999L17.14 7.9799C20.97 10.1899 20.97 13.8099 17.14 16.0199L14.05 17.7999L10.96 19.5799C7.13 21.7899 4 19.9799 4 15.5599V11.9999Z' stroke-miterlimit='10'></path></svg>
-                            </div>
-                        </div>
-                        <div class="yt-video-info">
-                            <h3 class="yt-video-title">${video.title}</h3>
-                            <span class="yt-video-date">${timeAgo(video.published)}</span>
-                        </div>
-                    </div>
-                `;
+                html += '<div class="yt-video-card' + shortClass + '" data-video-id="' + video.videoId + '" data-link="' + video.link + '" data-video-type="' + video.type + '">' +
+                    '<div class="yt-thumbnail-wrapper">' +
+                    '<img src="' + video.thumbnail + '" alt="' + video.title + '" loading="lazy">' +
+                    shortsBadge +
+                    '<div class="yt-play-icon">' +
+                    '<svg class="line" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11.9999V8.43989C4 4.01989 7.13 2.2099 10.96 4.4199L14.05 6.1999L17.14 7.9799C20.97 10.1899 20.97 13.8099 17.14 16.0199L14.05 17.7999L10.96 19.5799C7.13 21.7899 4 19.9799 4 15.5599V11.9999Z" stroke-miterlimit="10"></path></svg>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="yt-video-info">' +
+                    '<h3 class="yt-video-title">' + video.title + '</h3>' +
+                    '<span class="yt-video-date">' + timeAgo(video.published) + '</span>' +
+                    '</div>' +
+                    '</div>';
             });
             html += '</div>';
             this.elements.content.innerHTML = html;
 
             // ربط أحداث البطاقات
-            this.elements.content.querySelectorAll('.yt-video-card').forEach(card => {
-                const videoId = card.getAttribute('data-video-id');
-                const link = card.getAttribute('data-link');
+            var cards = this.elements.content.querySelectorAll('.yt-video-card');
+            for (var c = 0; c < cards.length; c++) {
+                (function(card) {
+                    var videoId = card.getAttribute('data-video-id');
+                    var link = card.getAttribute('data-link');
 
-                card.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    card.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        card.style.transform = '';
-                        this.openPlayer(videoId, link);
-                    }, 150);
-                });
+                    card.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        card.style.transform = 'scale(0.95)';
+                        setTimeout(function() {
+                            card.style.transform = '';
+                            self.openPlayer(videoId, link);
+                        }, 150);
+                    });
 
-                card.addEventListener('mouseenter', function() {
-                    this.style.zIndex = '10';
-                });
+                    card.addEventListener('mouseenter', function() {
+                        this.style.zIndex = '10';
+                    });
 
-                card.addEventListener('mouseleave', function() {
-                    this.style.zIndex = '';
-                });
-            });
+                    card.addEventListener('mouseleave', function() {
+                        this.style.zIndex = '';
+                    });
+                })(cards[c]);
+            }
         }
 
         addMoreVideos() {
-            const nextIndex = this.currentlyDisplayedCount + this.config.VIDEOS_PER_CLICK;
-            const newVideos = this.allFetchedVideos.slice(this.currentlyDisplayedCount, nextIndex);
+            var self = this;
+            var nextIndex = this.currentlyDisplayedCount + this.config.VIDEOS_PER_CLICK;
+            var newVideos = this.allFetchedVideos.slice(this.currentlyDisplayedCount, nextIndex);
 
             if (newVideos.length === 0) return;
 
-            let html = '';
-            newVideos.forEach(video => {
-                const shortClass = video.isShort ? ' is-short' : '';
-                const shortsBadge = video.isShort ? '<div class="yt-shorts-badge">SHORTS</div>' : '';
+            var html = '';
+            newVideos.forEach(function(video) {
+                var shortClass = video.isShort ? ' is-short' : '';
+                var shortsBadge = video.isShort ? '<div class="yt-shorts-badge">SHORTS</div>' : '';
 
-                html += `
-                    <div class="yt-video-card${shortClass}" data-video-id="${video.videoId}" data-link="${video.link}" data-video-type="${video.type}">
-                        <div class="yt-thumbnail-wrapper">
-                            <img src="${video.thumbnail}" alt="${video.title}" loading="lazy">
-                            ${shortsBadge}
-                            <div class="yt-play-icon">
-                                <svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><polygon points='5,3 19,12 5,21'></polygon></svg>
-                            </div>
-                        </div>
-                        <div class="yt-video-info">
-                            <h3 class="yt-video-title">${video.title}</h3>
-                            <span class="yt-video-date">${timeAgo(video.published)}</span>
-                        </div>
-                    </div>
-                `;
+                html += '<div class="yt-video-card' + shortClass + '" data-video-id="' + video.videoId + '" data-link="' + video.link + '" data-video-type="' + video.type + '">' +
+                    '<div class="yt-thumbnail-wrapper">' +
+                    '<img src="' + video.thumbnail + '" alt="' + video.title + '" loading="lazy">' +
+                    shortsBadge +
+                    '<div class="yt-play-icon">' +
+                    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"></polygon></svg>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="yt-video-info">' +
+                    '<h3 class="yt-video-title">' + video.title + '</h3>' +
+                    '<span class="yt-video-date">' + timeAgo(video.published) + '</span>' +
+                    '</div>' +
+                    '</div>';
             });
 
-            const grid = this.elements.content.querySelector('.yt-videos-grid');
+            var grid = this.elements.content.querySelector('.yt-videos-grid');
             if (grid) grid.insertAdjacentHTML('beforeend', html);
 
             this.currentlyDisplayedCount += newVideos.length;
             this.updateButtons();
 
             // ربط أحداث البطاقات الجديدة
-            const newCards = grid.querySelectorAll(`.yt-video-card:nth-last-child(-n+${newVideos.length})`);
-            newCards.forEach(card => {
-                const videoId = card.getAttribute('data-video-id');
-                const link = card.getAttribute('data-link');
+            var newCards = grid.querySelectorAll('.yt-video-card:nth-last-child(-n+' + newVideos.length + ')');
+            for (var i = 0; i < newCards.length; i++) {
+                (function(card) {
+                    var videoId = card.getAttribute('data-video-id');
+                    var link = card.getAttribute('data-link');
 
-                card.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    card.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        card.style.transform = '';
-                        this.openPlayer(videoId, link);
-                    }, 150);
-                });
-            });
+                    card.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        card.style.transform = 'scale(0.95)';
+                        setTimeout(function() {
+                            card.style.transform = '';
+                            self.openPlayer(videoId, link);
+                        }, 150);
+                    });
+                })(newCards[i]);
+            }
         }
 
         resetVideos() {
-            const cards = this.elements.content.querySelectorAll('.yt-video-card');
-            cards.forEach((card, index) => {
-                if (index >= this.config.INITIAL_DISPLAY_COUNT) {
-                    card.remove();
+            var cards = this.elements.content.querySelectorAll('.yt-video-card');
+            for (var i = 0; i < cards.length; i++) {
+                if (i >= this.config.INITIAL_DISPLAY_COUNT) {
+                    cards[i].remove();
                 }
-            });
+            }
             this.currentlyDisplayedCount = this.config.INITIAL_DISPLAY_COUNT;
             this.updateButtons();
         }
 
         updateButtons() {
-            const hasMore = this.currentlyDisplayedCount < this.allFetchedVideos.length;
-            const hasHidden = this.currentlyDisplayedCount > this.config.INITIAL_DISPLAY_COUNT;
+            var hasMore = this.currentlyDisplayedCount < this.allFetchedVideos.length;
+            var hasHidden = this.currentlyDisplayedCount > this.config.INITIAL_DISPLAY_COUNT;
 
             this.elements.resetBtn.classList.toggle('visible', hasHidden);
             this.elements.watchMore.classList.toggle('visible', hasMore);
         }
 
         // ==== إدارة المشغلات ====
-        createIframe(videoId, isShort = false) {
-            const params = new URLSearchParams({
+        createIframe(videoId, isShort) {
+            isShort = isShort || false;
+            var params = new URLSearchParams({
                 rel: '0',
                 showinfo: '0',
                 autoplay: '1',
@@ -1352,8 +1343,8 @@
                 params.set('playlist', videoId);
             }
 
-            const iframe = document.createElement('iframe');
-            iframe.src = `https://www.youtube.com/embed/${videoId}?${params.toString()}`;
+            var iframe = document.createElement('iframe');
+            iframe.src = 'https://www.youtube.com/embed/' + videoId + '?' + params.toString();
             iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
             iframe.allowFullscreen = true;
             iframe.frameBorder = '0';
@@ -1364,12 +1355,12 @@
         openPlayer(videoId, link) {
             this.stopMini();
             this.currentVideoId = videoId;
-            const isShort = isShorts(link);
+            var isShort = isShorts(link);
 
             this.elements.modal.style.display = 'block';
             this.elements.modalPlayer.innerHTML = '';
 
-            const iframe = this.createIframe(videoId, isShort);
+            var iframe = this.createIframe(videoId, isShort);
             this.elements.modalPlayer.appendChild(iframe);
             document.body.style.overflow = 'hidden';
         }
@@ -1380,7 +1371,7 @@
             this.elements.modal.style.display = 'none';
             this.elements.modalPlayer.innerHTML = '';
 
-            const iframe = this.createIframe(this.currentVideoId);
+            var iframe = this.createIframe(this.currentVideoId);
             this.elements.miniContainer.innerHTML = '';
             this.elements.miniContainer.appendChild(iframe);
             this.elements.miniPlayer.classList.add('active');
@@ -1403,27 +1394,26 @@
 
     // ==== التهيئة التلقائية ====
     function initWidgets() {
-        // البحث عن جميع الحاويات
-        const containers = document.querySelectorAll('[data-channel-id]');
-        
-        containers.forEach(container => {
-            const id = container.id || 'yt-widget-' + Math.random().toString(36).substr(2, 9);
-            const channelId = container.getAttribute('data-channel-id');
-            
-            if (!container.id) {
+        var containers = document.querySelectorAll('[data-channel-id]');
+
+        containers.forEach(function(container) {
+            var id = container.id;
+            if (!id) {
+                id = 'yt-widget-' + Math.random().toString(36).substr(2, 9);
                 container.id = id;
             }
-            
-            // قراءة الإعدادات من السمات
-            const config = {
+
+            var channelId = container.getAttribute('data-channel-id');
+
+            var config = {
                 CHANNEL_ID: channelId,
                 MAX_FETCH_COUNT: parseInt(container.getAttribute('data-max-count')) || DEFAULT_CONFIG.MAX_FETCH_COUNT,
                 INITIAL_DISPLAY_COUNT: parseInt(container.getAttribute('data-initial-count')) || DEFAULT_CONFIG.INITIAL_DISPLAY_COUNT,
                 VIDEOS_PER_CLICK: parseInt(container.getAttribute('data-per-click')) || DEFAULT_CONFIG.VIDEOS_PER_CLICK,
                 CACHE_DURATION: parseInt(container.getAttribute('data-cache-duration')) || DEFAULT_CONFIG.CACHE_DURATION
             };
-            
-            new YouTubeWidget(container.id, config);
+
+            new YouTubeWidget(id, config);
         });
     }
 
@@ -1435,10 +1425,10 @@
     }
 
     // تحديث دوري كل 10 دقائق
-    setInterval(() => {
-        const containers = document.querySelectorAll('[data-channel-id]');
-        containers.forEach(container => {
-            const widget = window[container.id + '_widget'];
+    setInterval(function() {
+        var containers = document.querySelectorAll('[data-channel-id]');
+        containers.forEach(function(container) {
+            var widget = window[container.id + '_widget'];
             if (widget && !widget.isLoading) {
                 widget.loadVideos(true);
             }
